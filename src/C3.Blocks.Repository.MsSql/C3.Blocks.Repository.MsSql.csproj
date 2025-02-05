@@ -14,7 +14,7 @@
     <Using Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CodeCorrectCollective.Blocks.Domain" Version="1.0.0" />
+    <PackageReference Include="CodeCorrectCollective.Blocks.Domain" Version="1.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
     <PackageReference Include="MinVer" Version="6.0.0">
