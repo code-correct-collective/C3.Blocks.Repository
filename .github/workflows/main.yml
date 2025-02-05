@@ -1,4 +1,4 @@
-name: Build C3.Blocks.EntityFramework.Testing
+name: Build C3.Blocks.Repository
 on:
   push:
     branches:
