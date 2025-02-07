@@ -37,7 +37,7 @@
 		<Description>A library to be used in conjunction with `CodeCorrectCollective.Blocks.Repository.Abstractions` and `CodeCorrectCollective.Blocks.Repository.MsSql`</Description>
 		<Copyright>Copyright © 2025</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Domain</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Repository</PackageProjectUrl>
 		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
 		<PackageTags>C3.Blocks.Domain</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
