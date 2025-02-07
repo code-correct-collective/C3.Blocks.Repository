@@ -36,7 +36,7 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The entity if found; otherwise, null.</returns>
     /// <exception cref="ArgumentNullException" />
-    public virtual async ValueTask<TEntity?> FindAsync([Required] TId id, CancellationToken cancellationToken = default)
+    public async ValueTask<TEntity?> FindAsync([Required] TId id, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(id, nameof(id));
         return await this.FindAsync([id], cancellationToken).ConfigureAwait(false);
