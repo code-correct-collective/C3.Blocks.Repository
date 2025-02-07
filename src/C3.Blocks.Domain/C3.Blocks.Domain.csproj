@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Using Include="System.Data" />
-    <Using Include="C3.Blocks.Domain" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="MinVer" Version="6.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -28,24 +27,21 @@
     <None Include="../../c3.png" Link="c3.png" Pack="true" PackagePath="" />
     <None Include="../../README.md" Link="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\C3.Blocks.Domain\C3.Blocks.Domain.csproj" />
-  </ItemGroup>
 
   <!-- nuget settings-->
   <PropertyGroup>
-    <PackageId>CodeCorrectCollective.Blocks.Repository.Abstractions</PackageId>
+    <PackageId>CodeCorrectCollective.Blocks.Domain</PackageId>
     <PackageIcon>c3.png</PackageIcon>
-		<Title>C3.Blocks.Repository.Abstractions</Title>
+		<Title>C3.Blocks.Domain</Title>
 		<Authors>Code Correct Collective</Authors>
-		<Description>An abstract library used as the foundation to create Repositories</Description>
+		<Description>A library to be used in conjunction with `CodeCorrectCollective.Blocks.Repository.Abstractions` and `CodeCorrectCollective.Blocks.Repository.MsSql`</Description>
 		<Copyright>Copyright © 2025</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Repository</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Domain</PackageProjectUrl>
 		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
-		<PackageTags>C3.Blocks.Repository.Abstractions</PackageTags>
+		<PackageTags>C3.Blocks.Domain</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<Product>C3.Blocks.Repository.Abstractions</Product>
+		<Product>C3.Blocks.Domain</Product>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
 		<!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
