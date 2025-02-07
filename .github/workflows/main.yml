@@ -1,5 +1,6 @@
 name: Build C3.Blocks.Repository
 on:
+  workflow_dispatch: 
   push:
     branches:
       - '**'
