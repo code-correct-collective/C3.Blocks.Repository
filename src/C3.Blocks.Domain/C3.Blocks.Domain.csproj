@@ -25,7 +25,7 @@
   <!-- Include files for nuget -->
   <ItemGroup>
     <None Include="../../c3.png" Link="c3.png" Pack="true" PackagePath="" />
-    <None Include="../../README.md" Link="README.md" Pack="true" PackagePath="" />
+    <None Include="README.md" Link="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <!-- nuget settings-->
@@ -34,7 +34,7 @@
     <PackageIcon>c3.png</PackageIcon>
 		<Title>C3.Blocks.Domain</Title>
 		<Authors>Code Correct Collective</Authors>
-		<Description>A library to be used in conjunction with `CodeCorrectCollective.Blocks.Repository.Abstractions` and `CodeCorrectCollective.Blocks.Repository.MsSql`</Description>
+		<Description>The foundational library to create entities that work wit teh repositories.</Description>
 		<Copyright>Copyright © 2025</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Repository</PackageProjectUrl>
