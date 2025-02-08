@@ -17,14 +17,14 @@ Provides foundational domain objects and helpers.
 
 ## CodeCorrectCollective.Blocks.Repository.Abstractions
 
-[![Nuget V](https://img.shields.io/nuget/v/CodeCorrectCollective.Blocks.Repository.Abstractions.svg?label=CodeCorrectCollective.Blocks.Repository.Abstractions:+version)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Domain)
-[![Nuget dl](https://img.shields.io/nuget/dt/CodeCorrectCollective.Blocks.Repository.Abstractions.svg?label=CodeCorrectCollective.Blocks.Repository.Abstractions:+downloads)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Domain)
+[![Nuget V](https://img.shields.io/nuget/v/CodeCorrectCollective.Blocks.Repository.Abstractions.svg?label=CodeCorrectCollective.Blocks.Repository.Abstractions:+version)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Repository.Abstractions)
+[![Nuget dl](https://img.shields.io/nuget/dt/CodeCorrectCollective.Blocks.Repository.Abstractions.svg?label=CodeCorrectCollective.Blocks.Repository.Abstractions:+downloads)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Repository.Abstractions)
 
 Provides the abstract interfaces to create standardized repositories and units of work.
 
 ## CodeCorrectCollective.Blocks.Repository.MsSql
-[![Nuget V](https://img.shields.io/nuget/v/CodeCorrectCollective.Blocks.Repository.MsSql.svg?label=CodeCorrectCollective.Blocks.Repository.MsSql:+version)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Domain)
-[![Nuget dl](https://img.shields.io/nuget/dt/CodeCorrectCollective.Blocks.Repository.MsSql.svg?label=CodeCorrectCollective.Blocks.Repository.MsSql:+downloads)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Domain)
+[![Nuget V](https://img.shields.io/nuget/v/CodeCorrectCollective.Blocks.Repository.MsSql.svg?label=CodeCorrectCollective.Blocks.Repository.MsSql:+version)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Repository.MsSql)
+[![Nuget dl](https://img.shields.io/nuget/dt/CodeCorrectCollective.Blocks.Repository.MsSql.svg?label=CodeCorrectCollective.Blocks.Repository.MsSql:+downloads)](https://www.nuget.org/packages/CodeCorrectCollective.Blocks.Repository.MsSql)
 
 Provides base classes for the MSSQL Server provider.
 
