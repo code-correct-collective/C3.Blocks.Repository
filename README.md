@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/code-correct-collective/C3.Blocks.Repository/actions/workflows/main.yml/badge.svg)](https://github.com/code-correct-collective/C3.Blocks.Repository/actions/workflows/main.yml)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](https://github.com/code-correct-collective/C3.Blocks.Repository/raw/refs/heads/main/LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 A foundational project for creating entities, repositories and unit of works.  Each of the 3 related assemblies work together to create the foundation
 for creating a DDD based application.
