@@ -64,6 +64,32 @@ public class PaginatedListFactoriesTests : TestBase
             });
     }
 
+    [Fact]
+    public async Task CreateKeysetPaginatedListAsyncWithNoResultsMethodTest()
+    {
+        await this.RunTestAsync(
+            async (context, c) =>
+            {
+                var empty = await context.Set<MyEntity>()
+                    .Where(d => d.Name == "I do not exist")
+                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, c);
+            }
+        );
+    }
+
+    [Fact]
+    public async Task CreateKeysetPaginatedListDescendingAsyncWithNoResultsMethodTest()
+    {
+        await this.RunTestAsync(
+            async (context, c) =>
+            {
+                var empty = await context.Set<MyEntity>()
+                    .Where(d => d.Name == "I do not exist")
+                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, c);
+            }
+        );
+
+    }
 
     [Fact]
     public async Task CreateKeysetPaginatedListDescendingAsyncMethodTest()

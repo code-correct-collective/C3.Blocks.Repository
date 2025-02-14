@@ -49,9 +49,6 @@ public static class PaginatedListFactories
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
 
-        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
-        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
-
         query = query
             .OrderBy(keySelector);
 
@@ -66,6 +63,14 @@ public static class PaginatedListFactories
         var items = await query
             .Take(size)
             .ToListAsync(cancellationToken).ConfigureAwait(false);
+
+        if (items.Count == 0)
+        {
+            return items.CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
+        }
+
+        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
+        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
 
         return items.CreateKeysetPaginatedList(minValue, maxValue, size);
     }
@@ -92,10 +97,6 @@ public static class PaginatedListFactories
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
 
-        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
-        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
-
-
         query = query
             .OrderByDescending(keySelector);
 
@@ -107,10 +108,17 @@ public static class PaginatedListFactories
             query = query.Where(lambda);
         }
 
-
         var items = await query
             .Take(size)
             .ToListAsync(cancellationToken).ConfigureAwait(false);
+
+        if (items.Count == 0)
+        {
+            return items.CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
+        }
+
+        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
+        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
 
         return items.CreateKeysetPaginatedList(minValue, maxValue, size);
     }

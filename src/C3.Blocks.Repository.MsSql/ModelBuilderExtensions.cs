@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace C3.Blocks.Repository.MsSql;
 
 /// <summary>
