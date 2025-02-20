@@ -26,7 +26,7 @@ public class ResultFactoriesTests
         // Assert
         Assert.False(result.Success);
         Assert.Equal(ExpectedData, result.Data);
-        Assert.Equal(ExpectedData, result.Message);
+        Assert.Equal(string.Empty, result.Message);
     }
 
     [Fact]
@@ -51,5 +51,17 @@ public class ResultFactoriesTests
         Assert.True(result.Success);
         Assert.Equal(ExpectedData, result.Data);
         Assert.Equal(ExpectedMessage, result.Message);
+    }
+
+    [Fact]
+    public void MakeSuccessfulResultWithoutMessage()
+    {
+        // Arrange, Act
+        var result = ExpectedData.CreateSuccessfulResult();
+
+        // Act
+        Assert.True(result.Success);
+        Assert.Equal(ExpectedData, result.Data);
+        Assert.Equal(string.Empty, result.Message);
     }
 }
