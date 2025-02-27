@@ -48,8 +48,8 @@ public class PaginatedListFactoriesTests : TestBase
                 var itemsTwo = await context.Set<MyEntity>().CreateKeysetPaginatedListAsync(
                     e => e.CreatedAt,
                     size,
-                    default,
-                    itemsOne.Items.Max(e => e.CreatedAt)
+                    itemsOne.Items.Max(e => e.CreatedAt),
+                    default
                 );
 
                 // Assert
@@ -72,7 +72,7 @@ public class PaginatedListFactoriesTests : TestBase
             {
                 var empty = await context.Set<MyEntity>()
                     .Where(d => d.Name == "I do not exist")
-                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, c);
+                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, cancellationToken: c);
             }
         );
     }
@@ -85,7 +85,7 @@ public class PaginatedListFactoriesTests : TestBase
             {
                 var empty = await context.Set<MyEntity>()
                     .Where(d => d.Name == "I do not exist")
-                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, c);
+                    .CreateKeysetPaginatedListDescendingAsync(d => d.CreatedAt, 20, cancellationToken: c);
             }
         );
 
@@ -110,8 +110,8 @@ public class PaginatedListFactoriesTests : TestBase
                 var itemsTwo = await context.Set<MyEntity>().CreateKeysetPaginatedListDescendingAsync(
                     e => e.CreatedAt,
                     size,
-                    default,
-                    itemsOne.Items.Max(e => e.CreatedAt)
+                    itemsOne.Items.Max(e => e.CreatedAt),
+                    default
                 );
 
                 // Assert

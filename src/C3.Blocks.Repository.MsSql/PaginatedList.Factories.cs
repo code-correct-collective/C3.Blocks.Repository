@@ -43,8 +43,8 @@ public static class PaginatedListFactories
         this IQueryable<T> query,
         Expression<Func<T, TOrderKey>> keySelector,
         int size,
-        CancellationToken cancellationToken,
-        TOrderKey? from = default)
+        TOrderKey? from = default,
+        CancellationToken cancellationToken = default)
         where TOrderKey : IComparable
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
@@ -91,8 +91,8 @@ public static class PaginatedListFactories
         this IQueryable<T> query,
         Expression<Func<T, TOrderKey>> keySelector,
         int size,
-        CancellationToken cancellationToken,
-        TOrderKey? from = default)
+        TOrderKey? from = default,
+        CancellationToken cancellationToken = default)
             where TOrderKey : IComparable
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
