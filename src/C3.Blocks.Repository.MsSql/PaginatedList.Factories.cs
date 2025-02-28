@@ -36,26 +36,41 @@ public static class PaginatedListFactories
     /// <param name="keySelector">The key selector expression.</param>
     /// <param name="size">The number of items per page.</param>
     /// <param name="cancellationToken">A token to cancel the operation.</param>
-    /// <param name="from">The starting point for pagination.</param>
+    /// <param name="before">The starting point for pagination.</param>
+    /// <param name="after">The starting point for pagination.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the keyset paginated list.</returns>
     /// <exception cref="ArgumentNullException" />
     public static async Task<KeysetPaginatedList<T, TOrderKey>> CreateKeysetPaginatedListAsync<T, TOrderKey>(
         this IQueryable<T> query,
         Expression<Func<T, TOrderKey>> keySelector,
         int size,
-        TOrderKey? from = default,
+        TOrderKey? before = default,
+        TOrderKey? after = default,
         CancellationToken cancellationToken = default)
         where TOrderKey : IComparable
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
 
+        if (!EqualityComparer<TOrderKey>.Default.Equals(before, default) && !EqualityComparer<TOrderKey>.Default.Equals(after, default))
+        {
+            throw new ArgumentException("Optionally supply either a before or after timestamp, but not both");
+        }
+
         query = query
             .OrderBy(keySelector);
 
-        if (!EqualityComparer<TOrderKey>.Default.Equals(from, default))
+        if (!EqualityComparer<TOrderKey>.Default.Equals(before, default))
         {
             var parameter = keySelector.Parameters[0];
-            var condition = Expression.LessThan(Expression.Constant(from), keySelector.Body);
+            var condition = Expression.GreaterThan(Expression.Constant(before), keySelector.Body);
+            var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
+            query = query.Where(lambda);
+        }
+
+        if (!EqualityComparer<TOrderKey>.Default.Equals(after, default))
+        {
+            var parameter = keySelector.Parameters[0];
+            var condition = Expression.LessThan(Expression.Constant(after), keySelector.Body);
             var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
             query = query.Where(lambda);
         }
@@ -84,26 +99,41 @@ public static class PaginatedListFactories
     /// <param name="keySelector">The key selector expression.</param>
     /// <param name="size">The number of items per page.</param>
     /// <param name="cancellationToken">A token to cancel the operation.</param>
-    /// <param name="from">The starting point for pagination.</param>
+    /// <param name="before">The starting point for pagination.</param>
+    /// <param name="after">The starting point for pagination.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the keyset paginated list in descending order.</returns>
     /// <exception cref="ArgumentNullException" />
     public static async Task<KeysetPaginatedList<T, TOrderKey>> CreateKeysetPaginatedListDescendingAsync<T, TOrderKey>(
         this IQueryable<T> query,
         Expression<Func<T, TOrderKey>> keySelector,
         int size,
-        TOrderKey? from = default,
+        TOrderKey? before = default,
+        TOrderKey? after = default,
         CancellationToken cancellationToken = default)
             where TOrderKey : IComparable
     {
         ArgumentNullException.ThrowIfNull(keySelector, nameof(keySelector));
 
+        if (!EqualityComparer<TOrderKey>.Default.Equals(before, default) && !EqualityComparer<TOrderKey>.Default.Equals(after, default))
+        {
+            throw new ArgumentException("Optionally supply either a before or after timestamp, but not both");
+        }
+
         query = query
             .OrderByDescending(keySelector);
 
-        if (!EqualityComparer<TOrderKey>.Default.Equals(from, default))
+        if (!EqualityComparer<TOrderKey>.Default.Equals(before, default))
         {
             var parameter = keySelector.Parameters[0];
-            var condition = Expression.GreaterThan(Expression.Constant(from), keySelector.Body);
+            var condition = Expression.GreaterThan(Expression.Constant(before), keySelector.Body);
+            var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
+            query = query.Where(lambda);
+        }
+
+        if (!EqualityComparer<TOrderKey>.Default.Equals(after, default))
+        {
+            var parameter = keySelector.Parameters[0];
+            var condition = Expression.LessThan(Expression.Constant(after), keySelector.Body);
             var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
             query = query.Where(lambda);
         }

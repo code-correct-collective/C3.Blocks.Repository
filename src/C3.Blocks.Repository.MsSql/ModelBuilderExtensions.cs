@@ -39,6 +39,7 @@ public static class ModelBuilderExtensions
     /// <param name="modelBuilder">The ModelBuilder instance.</param>
     /// <param name="databaseProviderName">The name of the database provider.</param>
     /// <exception cref="ArgumentNullException" />
+    [ExcludeFromCodeCoverage(Justification = "This is used only for testing/sqlite")]
     public static void FixDateTimeOffsetForSqlite(this ModelBuilder modelBuilder, string? databaseProviderName)
     {
         ArgumentNullException.ThrowIfNull(modelBuilder, nameof(modelBuilder));
