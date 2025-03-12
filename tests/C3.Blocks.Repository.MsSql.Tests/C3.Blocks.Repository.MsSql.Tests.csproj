@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="CodeCorrectCollective.Blocks.EntityFramework.Testing" Version="1.0.2" />
     <PackageReference Include="coverlet.collector" Version="6.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     <PackageReference Include="MockQueryable.NSubstitute" Version="7.0.4-beta" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="NSubstitute" Version="5.3.0" />
