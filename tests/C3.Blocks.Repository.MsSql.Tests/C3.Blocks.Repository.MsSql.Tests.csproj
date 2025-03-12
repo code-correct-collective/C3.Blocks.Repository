@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeCorrectCollective.Blocks.EntityFramework.Testing" Version="1.0.6" />
+    <PackageReference Include="CodeCorrectCollective.Blocks.EntityFramework.Testing" Version="1.0.7" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     <PackageReference Include="MockQueryable.NSubstitute" Version="7.0.3" />
