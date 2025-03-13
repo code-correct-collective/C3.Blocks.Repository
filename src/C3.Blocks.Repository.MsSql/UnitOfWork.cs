@@ -71,7 +71,7 @@ public class UnitOfWork<TDbContext>(TDbContext dbContext, ILoggerFactory loggerF
 
     /// <inheritdoc/>
     [ExcludeFromCodeCoverage(Justification = "Cannot get the Mocking to work.")]
-    public async Task ExecuteInResilientTransactionAsync(Func<CancellationToken, Task<bool>> actionAsync, IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default)
+    public async Task ExecuteInResilientTransactionAsync(Func<Task<bool>> actionAsync, IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(this.disposed, this);
         this.logger.LogTraceMethod(nameof(ExecuteInResilientTransactionAsync), []);
@@ -82,7 +82,7 @@ public class UnitOfWork<TDbContext>(TDbContext dbContext, ILoggerFactory loggerF
             using var transaction = await this.Context.Database.BeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(false);
             try
             {
-                var shouldCommit = await actionAsync(cancellationToken).ConfigureAwait(false);
+                var shouldCommit = await actionAsync().ConfigureAwait(false);
                 if (shouldCommit)
                 {
                     this.logger.LogDebugMethod(nameof(ExecuteInResilientTransactionAsync), "Committing transaction", []);

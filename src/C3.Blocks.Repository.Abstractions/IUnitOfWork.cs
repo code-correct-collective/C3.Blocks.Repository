@@ -19,7 +19,7 @@ public interface IUnitOfWork : IDisposable, IAsyncDisposable
     /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     Task ExecuteInResilientTransactionAsync(
-        Func<CancellationToken, Task<bool>> actionAsync,
+        Func<Task<bool>> actionAsync,
         IsolationLevel isolationLevel = IsolationLevel.Unspecified,
         CancellationToken cancellationToken = default);
 

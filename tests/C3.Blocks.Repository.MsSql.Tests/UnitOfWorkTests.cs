@@ -116,11 +116,10 @@ public class UnitOfWorkTests
             //     });
 
             // Act
-            await u.ExecuteInResilientTransactionAsync((c) =>
+            await u.ExecuteInResilientTransactionAsync(() =>
             {
                 return Task.FromResult(true);
-            },
-            default);
+            });
 
             // Assert;
             await db.Received(1).BeginTransactionAsync(default);
