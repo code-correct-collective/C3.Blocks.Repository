@@ -80,7 +80,7 @@ static partial class LoggingMessages
     [LoggerMessage(
         EventId = LoggingEvents.RemoveEntityInfo,
         Level = LogLevel.Information,
-        Message = "Attempting to update entity {id}"
+        Message = "Attempting to remove entity {id}"
     )]
     public static partial void LogRemoveEntityAttempt(this ILogger logger, object id);
 
