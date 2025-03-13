@@ -15,9 +15,13 @@ public interface IUnitOfWork : IDisposable, IAsyncDisposable
     /// Executes the specified action within a resilient transaction asynchronously.
     /// </summary>
     /// <param name="actionAsync">The action to execute within the transaction.</param>
+    /// <param name="isolationLevel">The isolation level to use for the transaction. Unspecified is the default.</param>
     /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task ExecuteInResilientTransactionAsync(Func<CancellationToken, Task<bool>> actionAsync, CancellationToken cancellationToken);
+    Task ExecuteInResilientTransactionAsync(
+        Func<CancellationToken, Task<bool>> actionAsync,
+        IsolationLevel isolationLevel = IsolationLevel.Unspecified,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Begins a new transaction with the specified isolation level.
