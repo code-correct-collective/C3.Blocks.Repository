@@ -29,25 +29,14 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
     /// </summary>
     protected DbSet<TEntity> Entities { get; } = context.Set<TEntity>();
 
-    /// <summary>
-    /// Finds an entity by its identifier.
-    /// </summary>
-    /// <param name="id">The identifier of the entity.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The entity if found; otherwise, null.</returns>
-    /// <exception cref="ArgumentNullException" />
+    /// <inheritdoc/>
     public async ValueTask<TEntity?> FindAsync([Required] TId id, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(id, nameof(id));
         return await this.FindAsync([id], cancellationToken).ConfigureAwait(false);
     }
 
-    /// <summary>
-    /// Finds an entity by its identifiers.
-    /// </summary>
-    /// <param name="ids">The identifiers of the entities.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The entity if found; otherwise, null.</returns>
+    /// <inheritdoc/>
     public virtual async ValueTask<TEntity?> FindAsync(TId?[] ids, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(FindAsync), ids.Cast<object>().ToArray());
@@ -55,13 +44,7 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
         return await this.Entities.FindAsync(keyValues: ids.Cast<object>().ToArray(), cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
-    /// <summary>
-    /// Adds an entity asynchronously.
-    /// </summary>
-    /// <param name="entity">The entity to add.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The added entity.</returns>
-    /// <exception cref="ArgumentNullException" />
+    /// <inheritdoc/>
     public virtual async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(AddAsync), [entity]);
@@ -79,38 +62,26 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
         return result.Entity;
     }
 
-    /// <summary>
-    /// Adds a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to add.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="ArgumentNullException" />
-    public Task AddRangeAsync(params TEntity[] entities)
+    /// <inheritdoc/>
+    public Task AddRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(AddRangeAsync), entities);
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
-        return this.AddRangeAsync(entities.AsEnumerable());
+        cancellationToken.ThrowIfCancellationRequested();
+        return this.AddRangeAsync(entities.AsEnumerable(), cancellationToken);
     }
 
-    /// <summary>
-    /// Adds a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to add.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task AddRangeAsync(IEnumerable<TEntity> entities)
+    /// <inheritdoc/>
+    public Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(AddRangeAsync), [entities]);
         this.Logger.LogAddRangeEntity(entities.Count());
-        return this.Entities.AddRangeAsync(entities);
+        cancellationToken.ThrowIfCancellationRequested();
+        return this.Entities.AddRangeAsync(entities, cancellationToken);
     }
 
-    /// <summary>
-    /// Updates an entity asynchronously.
-    /// </summary>
-    /// <param name="entity">The entity to update.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="ArgumentNullException" />
-    public virtual Task UpdateAsync(TEntity entity)
+    /// <inheritdoc/>
+    public virtual Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(UpdateAsync), [entity]);
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
@@ -121,41 +92,30 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
         }
 
         this.Logger.LogUpdateEntityAttempt(entity.Id);
+        cancellationToken.ThrowIfCancellationRequested();
         this.Entities.Update(entity);
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Updates a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to update.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task UpdateRangeAsync(params TEntity[] entities)
+    /// <inheritdoc/>
+    public Task UpdateRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(UpdateRangeAsync), entities);
-        return this.UpdateRangeAsync(entities.AsEnumerable());
+        return this.UpdateRangeAsync(entities.AsEnumerable(), cancellationToken);
     }
 
-    /// <summary>
-    /// Updates a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to update.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+    /// <inheritdoc/>
+    public Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
     {
         this.Logger.LogTraceMethod(nameof(UpdateRangeAsync), [entities]);
         this.Logger.LogUpdateRangeEntity(entities.Count());
+        cancellationToken.ThrowIfCancellationRequested();
         this.Entities.UpdateRange(entities);
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Removes an entity asynchronously.
-    /// </summary>
-    /// <param name="entity">The entity to remove.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="ArgumentNullException" />
-    public virtual Task RemoveAsync(TEntity entity)
+    /// <inheritdoc/>
+    public virtual Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(RemoveAsync), [entity]);
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
@@ -166,32 +126,27 @@ public class RepositoryBase<TEntity, TId, TDbContext>([Required] TDbContext cont
         }
 
         this.Logger.LogRemoveEntityAttempt(entity.Id);
+        cancellationToken.ThrowIfCancellationRequested();
         this.Entities.Remove(entity);
 
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Removes a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to remove.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task RemoveRangeAsync(params TEntity[] entities)
+    /// <inheritdoc/>
+    public Task RemoveRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default)
     {
         this.Logger.LogTraceMethod(nameof(RemoveAsync), entities);
-        return this.RemoveRangeAsync(entities.AsEnumerable());
+        cancellationToken.ThrowIfCancellationRequested();
+        return this.RemoveRangeAsync(entities.AsEnumerable(), cancellationToken);
     }
 
-    /// <summary>
-    /// Removes a range of entities asynchronously.
-    /// </summary>
-    /// <param name="entities">The entities to remove.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task RemoveRangeAsync(IEnumerable<TEntity> entities)
+    /// <inheritdoc/>
+    public Task RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
         var items = entities.ToArray();
         this.Logger.LogTraceMethod(nameof(RemoveAsync), items);
         this.Logger.LogRemoveRangeEntity(items.Length);
+        cancellationToken.ThrowIfCancellationRequested();
         this.Entities.RemoveRange(entities);
         return Task.CompletedTask;
     }

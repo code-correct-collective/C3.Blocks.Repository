@@ -71,7 +71,7 @@ public class RepositoryBaseTests : TestBase
             var e = new MyEntity();
 
             // Act
-            await u.Repository.AddRangeAsync(e);
+            await u.Repository.AddRangeAsync([e], c);
             await u.CommitAsync();
             var result = await u.Repository.FindAsync(e.Id, c);
 
@@ -130,7 +130,7 @@ public class RepositoryBaseTests : TestBase
             var updatedEntity = new MyEntity(this.Entities[0].Id) { Name = "Updated" };
 
             // Act
-            await u.Repository.UpdateRangeAsync(updatedEntity);
+            await u.Repository.UpdateRangeAsync([updatedEntity], c);
             await u.CommitAsync();
             var result = await u.Repository.FindAsync(updatedEntity.Id, c);
 
@@ -172,7 +172,7 @@ public class RepositoryBaseTests : TestBase
         await this.RunTestAsync(async (u, lm, c) =>
         {
             // Arrange, Act
-            await u.Repository.RemoveRangeAsync(this.Entities[2]);
+            await u.Repository.RemoveRangeAsync([this.Entities[2]], c);
             await u.CommitAsync();
             var remaining = await u.Repository.FindAsync(this.Entities[2].Id, c);
 

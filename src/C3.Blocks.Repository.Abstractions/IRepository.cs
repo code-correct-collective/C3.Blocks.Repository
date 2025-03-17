@@ -44,55 +44,63 @@ public interface IRepository<TEntity, in TId> : IRepository, IDisposable, IAsync
     /// </summary>
     /// <param name="entities">The entities.</param>
     /// <returns>Task&lt;TEntity&gt;.</returns>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task AddRangeAsync(params TEntity[] entities);
+    Task AddRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Adds the range asynchronous.
     /// </summary>
     /// <param name="entities">The entities.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task AddRangeAsync(IEnumerable<TEntity> entities);
+    Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates the specified entity.
     /// </summary>
     /// <param name="entity">The entity.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>A void <see cref="Task"/>.</returns>
-    Task UpdateAsync(TEntity entity);
+    Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates the range asynchronous.
     /// </summary>
     /// <param name="entities">The entities.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task UpdateRangeAsync(params TEntity[] entities);
+    Task UpdateRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates the range asynchronous.
     /// </summary>
     /// <param name="entities">The entities.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task UpdateRangeAsync(IEnumerable<TEntity> entities);
+    Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes the specified entity.
     /// </summary>
     /// <param name="entity">The entity.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>A void <see cref="Task"/>.</returns>
-    Task RemoveAsync(TEntity entity);
+    Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes the range asynchronous.
     /// </summary>
     /// <param name="entities">The entities.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task RemoveRangeAsync(params TEntity[] entities);
+    Task RemoveRangeAsync(TEntity[] entities, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes the range asynchronous.
     /// </summary>
     /// <param name="entities">The entities.</param>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>Task.</returns>
-    Task RemoveRangeAsync(IEnumerable<TEntity> entities);
+    Task RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 }

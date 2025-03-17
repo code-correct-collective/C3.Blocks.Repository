@@ -62,11 +62,11 @@ public class UnitOfWork<TDbContext>(TDbContext dbContext, ILoggerFactory loggerF
     }
 
     /// <inheritdoc/>
-    public async Task<int> CommitAsync()
+    public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(this.disposed, this);
         this.logger.LogTraceMethod(nameof(CommitAsync), []);
-        return await this.Context.SaveChangesAsync().ConfigureAwait(false);
+        return await this.Context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

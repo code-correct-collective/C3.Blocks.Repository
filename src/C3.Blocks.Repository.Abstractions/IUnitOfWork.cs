@@ -8,8 +8,9 @@ public interface IUnitOfWork : IDisposable, IAsyncDisposable
     /// <summary>
     /// Commits the current transaction asynchronously.
     /// </summary>
+    /// <param name="cancellationToken">The cancellation token</param>
     /// <returns>A task that represents the asynchronous commit operation.</returns>
-    Task<int> CommitAsync();
+    Task<int> CommitAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Executes the specified action within a resilient transaction asynchronously.
