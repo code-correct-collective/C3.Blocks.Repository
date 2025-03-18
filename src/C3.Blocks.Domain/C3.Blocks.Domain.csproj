@@ -34,7 +34,7 @@
     <PackageIcon>c3.png</PackageIcon>
 		<Title>C3.Blocks.Domain</Title>
 		<Authors>Code Correct Collective</Authors>
-		<Description>The foundational library to create entities that work wit teh repositories.</Description>
+		<Description>The foundational library to create entities that work wit the repositories.</Description>
 		<Copyright>Copyright © 2025</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/code-correct-collective/C3.Blocks.Repository</PackageProjectUrl>
