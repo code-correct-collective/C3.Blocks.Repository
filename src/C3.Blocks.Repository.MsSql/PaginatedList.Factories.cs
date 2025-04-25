@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 
 namespace C3.Blocks.Repository.MsSql;
@@ -56,6 +57,16 @@ public static class PaginatedListFactories
             throw new ArgumentException("Optionally supply either a before or after timestamp, but not both");
         }
 
+        var hasData = await query.AnyAsync(cancellationToken).ConfigureAwait(false);
+
+        if (!hasData)
+        {
+            return new List<T>().CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
+        }
+
+        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
+        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
+
         query = query
             .OrderBy(keySelector);
 
@@ -83,9 +94,6 @@ public static class PaginatedListFactories
         {
             return items.CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
         }
-
-        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
-        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
 
         return items.CreateKeysetPaginatedList(minValue, maxValue, size);
     }
@@ -118,6 +126,15 @@ public static class PaginatedListFactories
         {
             throw new ArgumentException("Optionally supply either a before or after timestamp, but not both");
         }
+        var hasData = await query.AnyAsync(cancellationToken).ConfigureAwait(false);
+
+        if (!hasData)
+        {
+            return new List<T>().CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
+        }
+
+        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
+        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
 
         query = query
             .OrderByDescending(keySelector);
@@ -146,9 +163,6 @@ public static class PaginatedListFactories
         {
             return items.CreateKeysetPaginatedList<T, TOrderKey>(default!, default!, size);
         }
-
-        var minValue = await query.OrderBy(keySelector).MinAsync(keySelector, cancellationToken).ConfigureAwait(false);
-        var maxValue = await query.OrderBy(keySelector).MaxAsync(keySelector, cancellationToken).ConfigureAwait(false);
 
         return items.CreateKeysetPaginatedList(minValue, maxValue, size);
     }
